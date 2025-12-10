@@ -13,3 +13,8 @@
 
 - [TODO LIST (Модуль 3)](/task_1-todos.md)
 - [Пошук зображень (Модуль 4)](/task_2-photos.md)
+
+## Бібліотеки
+### react-tabs
+- https://www.npmjs.com/package/react-tabs
+- https://reactcommunity.org/react-tabs/
