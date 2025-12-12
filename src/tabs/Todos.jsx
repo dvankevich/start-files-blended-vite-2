@@ -17,7 +17,9 @@ const Todos = () => {
     <>
       <Form onSubmit={addNewTodo} />
       <TodoList todoList={todos} />
-      <Text textAlign="center">There are no any todos ...</Text>
+      {todos.length === 0 && (
+        <Text textAlign="center">There are no any todos ...</Text>
+      )}
     </>
   );
 };
