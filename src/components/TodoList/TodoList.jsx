@@ -5,9 +5,9 @@ import TodoListItem from '../TodoListItem/TodoListItem';
 const TodoList = ({ todoList }) => {
   return (
     <Grid>
-      {todoList.map(todoItem => (
+      {todoList.map((todoItem, index) => (
         <GridItem key={todoItem.id}>
-          <TodoListItem todoItem={todoItem} />
+          <TodoListItem todoItem={todoItem} index={index} />
         </GridItem>
       ))}
     </Grid>
