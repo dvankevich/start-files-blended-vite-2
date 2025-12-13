@@ -19,10 +19,14 @@ const Todos = () => {
     setTodos(prevTodos => [...prevTodos, { id: nanoid(), text: inputValue }]);
   };
 
+  const deleteTodo = todoId => {
+    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== todoId));
+  };
+
   return (
     <>
       <Form onSubmit={addNewTodo} />
-      <TodoList todoList={todos} />
+      <TodoList todoList={todos} deleteTodo={deleteTodo} />
       {todos.length === 0 && (
         <Text textAlign="center">There are no any todos ...</Text>
       )}
