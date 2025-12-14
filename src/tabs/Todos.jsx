@@ -15,6 +15,10 @@ const Todos = () => {
   const [currentTodo, setCurrentTodo] = useState({});
 
   useEffect(() => {
+    console.log('currentTodo changed: ', currentTodo);
+  }, [currentTodo]);
+
+  useEffect(() => {
     window.localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
@@ -28,6 +32,7 @@ const Todos = () => {
   };
 
   const editTodo = todo => {
+    console.log('edit todo: ', todo);
     setIsEditing(true);
     setCurrentTodo({ ...todo });
   };
@@ -54,7 +59,7 @@ const Todos = () => {
         <EditForm
           updateTodo={updateTodo}
           cancelUpdate={cancelUpdate}
-          defaultValue={currentTodo.text}
+          defaultValue={currentTodo}
         />
       ) : (
         <Form onSubmit={addNewTodo} />
