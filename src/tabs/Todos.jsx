@@ -75,6 +75,7 @@ const Todos = () => {
         todoList={todos}
         deleteTodo={deleteTodo}
         handleEditTodo={handleEditTodo}
+        isEditing={isEditing}
       />
       {todos.length === 0 && (
         <Text textAlign="center">There are no any todos ...</Text>
