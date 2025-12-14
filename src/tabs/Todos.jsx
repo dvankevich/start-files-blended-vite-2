@@ -36,8 +36,6 @@ const Todos = () => {
   };
 
   const cancelUpdate = () => {
-    console.log('cancel Update');
-
     setIsEditing(false);
     setCurrentTodo({});
   };
