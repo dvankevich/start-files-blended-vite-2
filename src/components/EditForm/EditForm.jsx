@@ -7,31 +7,24 @@ const EditForm = ({ updateTodo, cancelUpdate, defaultValue }) => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    const inputValue = defaultValue.text;
+    const inputValue = evt.target.elements.text.value;
+    console.log('inputValue: ', inputValue);
     if (!inputValue.trim()) {
       alert('Please enter a some text');
       return;
     }
     updateTodo(inputValue);
-
+    console.log('Submitted value: ', inputValue);
     evt.target.reset();
   };
 
-  const handleCancel = () => {
-    cancelUpdate();
-  };
-
   return (
-    <form className={style.form}>
-      <button
-        className={style.submitButton}
-        type="submit"
-        onSubmit={handleSubmit}
-      >
+    <form className={style.form} onSubmit={handleSubmit}>
+      <button className={style.submitButton} type="submit">
         <RiSaveLine color="green" size="16px" />
       </button>
 
-      <button className={style.editButton} type="button" onClick={handleCancel}>
+      <button className={style.editButton} type="button" onClick={cancelUpdate}>
         <MdOutlineCancel color="red" size="16px" />
       </button>
 
@@ -39,7 +32,7 @@ const EditForm = ({ updateTodo, cancelUpdate, defaultValue }) => {
         className={style.input}
         placeholder="What do you want to write?"
         name="text"
-        required
+        // required
         defaultValue={defaultValue}
         autoFocus
       />

@@ -15,15 +15,14 @@ const Todos = () => {
   const [currentTodo, setCurrentTodo] = useState({});
 
   useEffect(() => {
-    console.log('currentTodo changed: ', currentTodo);
-  }, [currentTodo]);
-
-  useEffect(() => {
     window.localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
   const addNewTodo = inputValue => {
-    console.log(inputValue); // має вивести значення інпуту під час сабміту форми
+    if (findTodo(inputValue)) {
+      alert(`This todo "${inputValue}" already exists!`);
+      return;
+    }
     setTodos(prevTodos => [...prevTodos, { id: nanoid(), text: inputValue }]);
   };
 
@@ -31,10 +30,9 @@ const Todos = () => {
     setTodos(prevTodos => prevTodos.filter(todo => todo.id !== todoId));
   };
 
-  const editTodo = todo => {
-    console.log('edit todo: ', todo);
+  const handleEditTodo = editTodo => {
+    setCurrentTodo(editTodo);
     setIsEditing(true);
-    setCurrentTodo({ ...todo });
   };
 
   const cancelUpdate = () => {
@@ -44,13 +42,21 @@ const Todos = () => {
     setCurrentTodo({});
   };
 
-  const updateTodo = e => {
-    e.preventDefault();
-    setTodos(prevTodos =>
-      prevTodos.map(todo => (todo.id === currentTodo.id ? currentTodo : todo))
+  const updateTodo = text => {
+    if (findTodo(text)) {
+      alert(`This todo "${text}" already exists!`);
+      return;
+    }
+    setTodos(
+      todos.map(todo =>
+        todo.id === currentTodo.id ? { ...currentTodo, text } : todo
+      )
     );
-    setIsEditing(false);
-    setCurrentTodo({});
+    cancelUpdate();
+  };
+
+  const findTodo = text => {
+    return todos.find(todo => todo.text.toLowerCase() === text.toLowerCase());
   };
 
   return (
@@ -59,13 +65,17 @@ const Todos = () => {
         <EditForm
           updateTodo={updateTodo}
           cancelUpdate={cancelUpdate}
-          defaultValue={currentTodo}
+          defaultValue={currentTodo.text}
         />
       ) : (
         <Form onSubmit={addNewTodo} />
       )}
 
-      <TodoList todoList={todos} deleteTodo={deleteTodo} editTodo={editTodo} />
+      <TodoList
+        todoList={todos}
+        deleteTodo={deleteTodo}
+        handleEditTodo={handleEditTodo}
+      />
       {todos.length === 0 && (
         <Text textAlign="center">There are no any todos ...</Text>
       )}

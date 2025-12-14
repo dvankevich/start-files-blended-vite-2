@@ -2,7 +2,7 @@ import Grid from '../Grid/Grid';
 import GridItem from '../GridItem/GridItem';
 import TodoListItem from '../TodoListItem/TodoListItem';
 
-const TodoList = ({ todoList, deleteTodo, editTodo }) => {
+const TodoList = ({ todoList, deleteTodo, handleEditTodo }) => {
   return (
     <Grid>
       {todoList.map((todoItem, index) => (
@@ -11,7 +11,7 @@ const TodoList = ({ todoList, deleteTodo, editTodo }) => {
             todoItem={todoItem}
             index={index}
             deleteTodo={deleteTodo}
-            editTodo={editTodo}
+            handleEditTodo={handleEditTodo}
           />
         </GridItem>
       ))}
