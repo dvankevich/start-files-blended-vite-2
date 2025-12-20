@@ -1,16 +1,16 @@
 import { FiSearch } from 'react-icons/fi';
 import style from './Form.module.css';
 
-const Form = ({onSubmit}) => {
+const Form = ({ onSubmit }) => {
   const handleSubmit = evt => {
     evt.preventDefault();
-    const inputValue = evt.target.search.value;
-    if (!inputValue.trim()) {
+    const inputValue = evt.target.search.value.trim();
+    if (!inputValue) {
       alert('Please enter a some text');
       return;
     }
     onSubmit(inputValue);
-    
+
     evt.target.reset();
   };
 
